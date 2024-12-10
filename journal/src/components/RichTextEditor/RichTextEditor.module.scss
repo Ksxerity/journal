@@ -1,0 +1,39 @@
+@import '../../utils/variables.scss';
+
+.toolbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.character-count-and-status-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  .unsaved-changes {
+    width: 5px;
+    height: 5px;
+    border: 1px solid;
+    border-radius: 50%;
+
+    &.green-marker {
+      background-color: green;
+      border-color: green;
+    }
+
+    &.yellow-marker {
+      background-color: orange;
+      border-color: orange;
+    }
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $editor-color;
+  min-height: 60vh;
+  max-height: 60vh;
+}

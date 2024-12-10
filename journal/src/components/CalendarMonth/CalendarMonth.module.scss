@@ -1,0 +1,52 @@
+@import "../../utils/variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .month-label {
+    font-size: 1.5em;
+    padding-bottom: 30px;
+  }
+
+  .dates-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+
+    .day-of-week-label {
+      display: flex;
+      justify-content: center;
+      font-size: .75em;
+      padding-bottom: 2px;
+    }
+
+    .dates-of-week {
+      font-size: .75em;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      min-width: 0;
+
+      &.one-rating {
+        background-color: $one-rating-color;
+      }
+
+      &.two-rating {
+        background-color: $two-rating-color;
+      }
+
+      &.three-rating {
+        background-color: $three-rating-color;
+      }
+
+      &.four-rating {
+        background-color: $four-rating-color;
+      }
+
+      &.five-rating {
+        background-color: $five-rating-color;
+      }
+    }
+  }
+}

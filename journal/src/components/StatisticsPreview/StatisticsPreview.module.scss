@@ -1,0 +1,63 @@
+@import "../../utils/variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  .stat-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px 15px 10px;
+    margin: 5px 0px 5px 0px;
+
+    &.entries-stat {
+      border: 1px solid $editor-color;
+      background-color: $editor-color;
+      border-radius: 10px;
+    }
+
+    &.one-rating {
+      border: 1px solid $one-rating-color;
+      background-color: $one-rating-color;
+      border-radius: 10px;
+    }
+
+    &.two-rating {
+      border: 1px solid $two-rating-color;
+      background-color: $two-rating-color;
+      border-radius: 10px;
+    }
+
+    &.three-rating {
+      border: 1px solid $three-rating-color;
+      background-color: $three-rating-color;
+      border-radius: 10px;
+    }
+
+    &.four-rating {
+      border: 1px solid $four-rating-color;
+      background-color: $four-rating-color;
+      border-radius: 10px;
+    }
+
+    &.five-rating {
+      border: 1px solid $five-rating-color;
+      background-color: $five-rating-color;
+      border-radius: 10px;
+    }
+
+    .stat-title {}
+
+    .stat-value {}
+  }
+
+  .yearly-text {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1.2em;
+  }
+}
