@@ -7,14 +7,14 @@ const apiUrlBase = 'http://localhost:5000/api';
 export const getJournalEntriesByYear = async (year: number): Promise<JournalEntry[]> => {
   const apiUrl = `${apiUrlBase}/journalentries/year/${year}`;
 
-  const response = await axios.get(apiUrl)
+  const response = await axios.get(apiUrl);
   return response.data;
 }
 
 export const getAllJournalEntries = async (): Promise<JournalEntry[]> => {
   const apiUrl = `${apiUrlBase}/journalentries`;
 
-  const response = await axios.get(apiUrl)
+  const response = await axios.get(apiUrl);
   return response.data;
 }
 
@@ -29,11 +29,17 @@ export const getJournalEntryByDate = async (date: string): Promise<JournalEntry>
 export const createJournalEntry = async (data: JournalEntryBody) => {
   const apiUrl = `${apiUrlBase}/journalentries`;
 
-  return axios.post(apiUrl, data)
+  return axios.post(apiUrl, data);
 }
 
 export const updateJournalEntry = async (data: JournalEntry) => {
   const apiUrl = `${apiUrlBase}/journalentries/${data.id}`;
 
-  return axios.put(apiUrl, data)
+  return axios.put(apiUrl, data);
+}
+
+export const deleteJournalEntry = async (data: JournalEntry) => {
+  const apiUrl = `${apiUrlBase}/journalentries/${data.id}`;
+
+  return axios.delete(apiUrl);
 }

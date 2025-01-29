@@ -7,9 +7,10 @@ import TwoSquareIcon from '../../assets/2-square.svg?react';
 import ThreeSquareIcon from '../../assets/3-square.svg?react';
 import FourSquareIcon from '../../assets/4-square.svg?react';
 import FiveSquareIcon from '../../assets/5-square.svg?react';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { getFormattedDateString, getISOStringLocal, populateDateLabel } from '../../utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getJournalEntryByDate, createJournalEntry, updateJournalEntry, getCurrentWeatherConditions } from '../../apis';
+import { getJournalEntryByDate, createJournalEntry, updateJournalEntry, getCurrentWeatherConditions, deleteJournalEntry } from '../../apis';
 import Underline from '@tiptap/extension-underline';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -71,14 +72,27 @@ const EntryPreview = (props: EntryPreivewProps) => {
   const createMutation = useMutation({
     mutationFn: createJournalEntry,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['journalentries'] })
+      queryClient.invalidateQueries({ queryKey: ['journalentries'] });
     },
   });
 
   const updateMutation = useMutation({
     mutationFn: updateJournalEntry,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['journalentries'] })
+      queryClient.invalidateQueries({ queryKey: ['journalentries'] });
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: deleteJournalEntry,
+    onSuccess: () => {
+      queryClient.removeQueries({ queryKey: ['journalentries', 'date', urlDateString] });
+      queryClient.invalidateQueries({ queryKey: ['journalentries'] });
+      setSubject('');
+      setRating(null);
+      if (editor) {
+        editor.commands.setContent(null);
+      }
     },
   });
 
@@ -165,49 +179,55 @@ const EntryPreview = (props: EntryPreivewProps) => {
           </Box>
         </Box>
         <RichTextEditor editor={editor} isLoading={isLoading} unsavedChanged={unsavedChanges} />
-        <Button
-          disableFocusRipple
-          variant="outlined"
-          sx={{
-            textTransform: 'none',
-            marginTop: '5px',
-            borderColor: 'rgba(0, 0, 0, 0.32)',
-            color: 'rgba(0, 0, 0)',
-            '&:hover': {
-              backgroundColor: 'rgba(0, 0, 0, 0.12)',
-              borderColor: 'rgba(0, 0, 0, 0.32)',
-            }
-          }}
-          disabled={!subject || !rating || createMutation.isPending || updateMutation.isPending}
-          onClick={() => {
-            if (!rating) return;
-            if (selectedJournalEntryData) {
-              updateMutation.mutate({
-                ...selectedJournalEntryData,
-                subject,
-                rating,
-                entry_text: editor?.getHTML() ?? "",
-                last_updated_date: getISOStringLocal(new Date().toString())
-              })
-            } else {
-              const currentDateISOString = getISOStringLocal(new Date().toString());
-              const currentDateFormattedString = getFormattedDateString(new Date().toString());
-              const entryDateFormattedString = getFormattedDateString(urlDateString);
-              createMutation.mutate({
-                subject,
-                rating,
-                entry_text: editor?.getHTML() ?? "",
-                entry_date: entryDateFormattedString,
-                created_date: currentDateISOString,
-                last_updated_date: currentDateISOString,
-                weather_description: currentDateFormattedString === entryDateFormattedString ? weatherData?.weather_description : undefined,
-                weather_code: currentDateFormattedString === entryDateFormattedString ? weatherData?.weather_code : undefined
-              })
-            }
-            setUnsavedChanges(false);
-          }}>
-          {createMutation.isPending || updateMutation.isPending ? <CircularProgress size="1.75em" /> : getButtonText()}
-        </Button>
+        <Box className={styles.footer}>
+          <Button
+            disableFocusRipple
+            variant="outlined"
+            className={styles['submit-button']}
+            disabled={!rating || createMutation.isPending || updateMutation.isPending || deleteMutation.isPending}
+            onClick={() => {
+              if (!rating) return;
+              if (selectedJournalEntryData) {
+                updateMutation.mutate({
+                  ...selectedJournalEntryData,
+                  subject,
+                  rating,
+                  entry_text: editor?.getHTML() ?? "",
+                  last_updated_date: getISOStringLocal(new Date().toString())
+                })
+              } else {
+                const currentDateISOString = getISOStringLocal(new Date().toString());
+                const currentDateFormattedString = getFormattedDateString(new Date().toString());
+                const entryDateFormattedString = getFormattedDateString(urlDateString);
+                createMutation.mutate({
+                  subject,
+                  rating,
+                  entry_text: editor?.getHTML() ?? "",
+                  entry_date: entryDateFormattedString,
+                  created_date: currentDateISOString,
+                  last_updated_date: currentDateISOString,
+                  weather_description: currentDateFormattedString === entryDateFormattedString ? weatherData?.weather_description : undefined,
+                  weather_code: currentDateFormattedString === entryDateFormattedString ? weatherData?.weather_code : undefined
+                })
+              }
+              setUnsavedChanges(false);
+            }}>
+            {createMutation.isPending || updateMutation.isPending ? <CircularProgress size="1.75em" /> : getButtonText()}
+          </Button>
+          <IconButton
+            disableFocusRipple
+            disabled={!selectedJournalEntryData || deleteMutation.isPending }
+            color="warning"
+            className={styles['delete-button']}
+            onClick={() => {
+              if (selectedJournalEntryData) {
+                deleteMutation.mutate(selectedJournalEntryData);
+              }
+            }}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Box>
       </Box>
     </ThemeProvider>
   )

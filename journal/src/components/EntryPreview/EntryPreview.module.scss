@@ -61,6 +61,33 @@
       }
     }
   }
+  .footer {
+    display: flex;
+    margin-top: 5px;
+    gap: 1px;
+    .submit-button {
+      flex-grow: 1;
+      text-transform: none;
+      &:not(:disabled) {
+        border-color: rgba(0, 0, 0, 0.32);
+        color: rgba(0, 0, 0);
+      }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.12);
+        border-color: rgba(0, 0, 0, 0.32);
+      }
+    }
+    .delete-button {
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 4px;
+      border-color: rgba(0, 0, 0, 0.12);
+      &:not(:disabled) {
+        border-color: rgb(237, 108, 2);
+      }
+  
+    }
+  }
 }
 
 .editor-container {

@@ -1,4 +1,4 @@
-import { getJournalEntriesByYear, getAllJournalEntries, getJournalEntryByDate, createJournalEntry, updateJournalEntry } from './db';
+import { getJournalEntriesByYear, getAllJournalEntries, getJournalEntryByDate, createJournalEntry, updateJournalEntry, deleteJournalEntry } from './db';
 import { getCurrentWeatherConditions } from './weather';
 
 export {
@@ -7,5 +7,6 @@ export {
   getJournalEntryByDate,
   createJournalEntry,
   updateJournalEntry,
+  deleteJournalEntry,
   getCurrentWeatherConditions
 };

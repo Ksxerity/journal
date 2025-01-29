@@ -58,5 +58,17 @@ namespace MyWebApiProject.Controllers
             var journalEntries = await _journalEntryService.GetAllJournalEntriesAsync();
             return Ok(journalEntries);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteJournalEntry(int id)
+        {
+            var result = await _journalEntryService.DeleteJournalEntry(id);
+            if (!result)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
     }
 }

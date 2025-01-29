@@ -67,6 +67,19 @@ namespace MyWebApiProject.Services
 
             return await _context.JournalEntries.ToArrayAsync();
         }
+
+        public async Task<bool> DeleteJournalEntry(int id)
+        {
+            var existingEntry = _context.JournalEntries.FirstOrDefault(entry => entry.Id == id);
+            if (existingEntry == null)
+            {
+                return false;
+            }
+
+            _context.JournalEntries.Remove(existingEntry);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
 
