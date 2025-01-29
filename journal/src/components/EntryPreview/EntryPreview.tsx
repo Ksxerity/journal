@@ -217,7 +217,7 @@ const EntryPreview = (props: EntryPreivewProps) => {
           <IconButton
             disableFocusRipple
             disabled={!selectedJournalEntryData || deleteMutation.isPending }
-            color="warning"
+            color="error"
             className={styles['delete-button']}
             onClick={() => {
               if (selectedJournalEntryData) {
