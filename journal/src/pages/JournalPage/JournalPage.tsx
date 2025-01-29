@@ -19,7 +19,7 @@ const JournalPage = () => {
 
   const { data } = useQuery({
     queryKey: ['weather'],
-    queryFn: () => getCurrentWeatherConditions('Seoul'),
+    queryFn: () => getCurrentWeatherConditions('New York'),
     staleTime: 1800000,
   });
 
@@ -70,25 +70,34 @@ const JournalPage = () => {
         </Box>
         <Box className={styles['first-divider']} />
         <Box className={styles['navigation-buttons']}>
-          <IconButton disableRipple className={styles['calendar-button']}>
-            <ArrowBackIcon className={styles['calendar-icon']} onClick={() => {
+          <IconButton 
+            disableRipple 
+            className={styles['calendar-button']} 
+            onClick={() => {
               const entryDate = new Date(date ?? currentDate);
               entryDate.setDate(entryDate.getDate() - 1);
               navigate(`/calendar/${entryDate.getFullYear()}-${entryDate.getMonth() + 1}-${entryDate.getDate()}`)
-            }} />
+            }}
+          >
+            <ArrowBackIcon className={styles['calendar-icon']} />
           </IconButton>
-          <IconButton disableRipple className={styles['calendar-button']}>
-            <CalendarWeekIcon className={styles['calendar-icon']} onClick={() => navigate('/calendar')} />
+          <IconButton disableRipple className={styles['calendar-button']} onClick={() => navigate('/calendar')}>
+            <CalendarWeekIcon className={styles['calendar-icon']} />
           </IconButton>
-          <IconButton disableRipple className={styles['calendar-button']}>
-            <CalendarDateIcon className={styles['calendar-icon']} onClick={() => navigate('/')} />
+          <IconButton disableRipple className={styles['calendar-button']} onClick={() => navigate('/')}>
+            <CalendarDateIcon className={styles['calendar-icon']} />
           </IconButton>
-          <IconButton disableRipple disabled={isEntryDateCurrentDate()} className={styles['calendar-button']}>
-            <ArrowForwardIcon className={styles['calendar-icon']} onClick={() => {
+          <IconButton 
+            disableRipple 
+            disabled={isEntryDateCurrentDate()} 
+            className={styles['calendar-button']}
+            onClick={() => {
               const entryDate = new Date(date ?? currentDate);
               entryDate.setDate(entryDate.getDate() + 1);
               navigate(`/calendar/${entryDate.getFullYear()}-${entryDate.getMonth() + 1}-${entryDate.getDate()}`)
-            }} />
+            }}
+          >
+            <ArrowForwardIcon className={styles['calendar-icon']} />
           </IconButton>
         </Box>
         <Box className={styles['second-divider']} />

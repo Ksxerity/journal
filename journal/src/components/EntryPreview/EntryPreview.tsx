@@ -48,7 +48,7 @@ const EntryPreview = (props: EntryPreivewProps) => {
 
   const { data: weatherData } = useQuery({
     queryKey: ['weather'],
-    queryFn: () => getCurrentWeatherConditions('Seoul'),
+    queryFn: () => getCurrentWeatherConditions('New York'),
     staleTime: 1800000,
   });
 

@@ -13,7 +13,7 @@
   ],
   "extraFiles": [
     {
-      "from": "../backend/bin/Release/net8.0/linux-x64/publish",
+      "from": "../backend/bin/Release/net8.0/win-x64/publish",
       "to": "backend",
       "filter": ["**/*"]
     }
@@ -36,11 +36,4 @@
     "allowToChangeInstallationDirectory": true,
     "deleteAppDataOnUninstall": false
   },
-  "linux": {
-    "target": [
-      "deb"
-    ],
-    "artifactName": "${productName}-Linux-${version}.${ext}",
-    "icon": "build/icon.png"
-  }
 }

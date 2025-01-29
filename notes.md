@@ -1,16 +1,3 @@
-CREATE TABLE journal_entries (
-    id INT AUTO_INCREMENT,
-    subject VARCHAR(200) NOT NULL,
-    rating INT NOT NULL,
-    entry_text TEXT NOT NULL,
-    entry_date DATE NOT NULL,
-    created_date DATETIME NOT NULL,
-    last_updated_date DATETIME NOT NULL,
-    weather_description VARCHAR(50),
-    weather_code INT,
-    PRIMARY KEY (id)
-);
-
 - Show weather descrption on hover
 - Location search for WeatherAPI
 - Settings
@@ -26,14 +13,3 @@ CREATE TABLE journal_entries (
 
 Bugs:
     - Delayed SVG animation for weather
-
-## Electron
-
-    Backend:
-        dotnet publish -c Release -r linux-x64 --self-contained
-    
-    Frontend:
-        npm run build
-
-    CMD:
-        sudo dpkg -i /path/to/file

@@ -33,25 +33,24 @@ let backendProcess: any | null;
 function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.APP_ROOT, os.platform() === 'win32' ? 'build/icon.ico' : 'build/icon.png'),
+    width: 1200,
+    height: 1000,
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
     },
   })
 
-  win.removeMenu();
-
-  // Test active push message to Renderer-process.
-  win.webContents.on('did-finish-load', () => {
-    win?.webContents.send('main-process-message', (new Date).toLocaleString())
-  })
 
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL)
-    win.webContents.openDevTools();
   } else {
-    // win.loadFile('dist/index.html')
+    win.removeMenu();
     win.loadFile(path.join(RENDERER_DIST, 'index.html'))
   }
+}
+
+if (VITE_DEV_SERVER_URL) {
+  app.disableHardwareAcceleration();
 }
 
 app.on('ready', () => {

@@ -7,7 +7,7 @@
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "PUT_DATABASE_CONNECTION_HERE"
+    "DefaultConnection": "Server=127.0.0.1;Port=3306;Database=journal_database;Uid=<PUT_MYSQL_USER_ID_HERE>;Pwd=<PUT_MYSQL_USER_PASSWORD_HERE>"
   },
   "ApiSettings": {
     "WeatherApiKey": "PUT_WEATHER_API_KEY_HERE"
