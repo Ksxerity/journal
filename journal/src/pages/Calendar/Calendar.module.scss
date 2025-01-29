@@ -6,7 +6,7 @@
   .year-label-container {
     display: flex;
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 30px;
     gap: 50px;
 
     .arrow-button {
@@ -31,13 +31,14 @@
     border-top: 2px groove #BDC3C7;
     width: 40%;
     margin-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
   }
 
   .calendar-month-container {
     display: grid;
-    width: 55vw;
+    width: 60vw;
     row-gap: 30px;
+    column-gap: 20px;
     align-items: start;
 
     grid-template-columns: repeat(4, minmax(0, 1fr));

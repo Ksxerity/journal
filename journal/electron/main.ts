@@ -33,7 +33,7 @@ let backendProcess: any | null;
 function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.APP_ROOT, os.platform() === 'win32' ? 'build/icon.ico' : 'build/icon.png'),
-    width: 1200,
+    width: 1500,
     height: 1000,
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
