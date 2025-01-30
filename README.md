@@ -16,6 +16,11 @@ Rich Text Editor TipTap: https://tiptap.dev/docs/editor/introduction
 
 FAVICON/App Icon Attribution: <a href="https://www.flaticon.com/free-icons/journal" title="journal icons">Journal icons created by nangicon - Flaticon</a>
 
+## Demo Photos
+
+![Demo](./Demo.JPG)
+![Demo](./Demo2.JPG)
+
 ## Installation
 
 ### Weatherapi API key
